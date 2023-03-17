@@ -1,3 +1,7 @@
+<?php
+  header('Location: index.php');
+  exit;
+?>
 <!DOCTYPE html>
 <html>
 <body>
@@ -11,7 +15,7 @@ $email    = "";
 $errors = array(); 
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'project');
+$db = mysqli_connect('localhost', 'root', '', 'booking_system');
 
 if ($db->connect_error) {
     die("Connection failed: " . $db->connect_error);
@@ -19,15 +23,14 @@ if ($db->connect_error) {
 
 
 
-$sql = "SELECT id, username, email, img FROM users";
+$sql = "SELECT customer_id, cust_name, email FROM customers_tbl";
 $result = $db->query($sql);
 
 
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        print "<br> id: ". $row["id"]. "<br> - Name: ". $row["username"]. "<br> - Email: " . $row["email"] . "<br>";
-      print "<img src=\"".$row["img"]."\">";
+        print "<br> - id: ". $row["customer_id"]. "<br> - Name: ". $row["cust_name"]. "<br> - Email: " . $row["email"] . "<br>";
      
     }
 } else {
